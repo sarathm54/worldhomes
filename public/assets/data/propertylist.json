@@ -5,43 +5,43 @@
         "rentalPeriod": "1 Year",
         "price": "5000",
         "unit": "USDC",
-        "thumbnailURL": "/assets/homes/home1",
-        "objectURL": "/assets/homes/home1"
+        "thumbnailURL": "/assets/images/home_thumb.png",
+        "objectURL": "/assets/homes/home1/cafe_soca.glb"
     },
     {
         "id": 2,
         "name": "Villa 2",
-        "rentalPeriod": "1 Year",
-        "price": "6000",
+        "rentalPeriod": "1.5 Year",
+        "price": "6500",
         "unit": "MATIC",
-        "thumbnailURL": "/assets/homes/home2",
-        "objectURL": "/assets/homes/home2"
+        "thumbnailURL": "/assets/images/home_thumb.png",
+        "objectURL": "/assets/homes/home2/house_24.glb"
     },
     {
         "id": 3,
-        "name": "Villa 2",
-        "rentalPeriod": "1 Year",
+        "name": "Villa 3",
+        "rentalPeriod": "1.5 Year",
         "price": "6000",
         "unit": "MATIC",
-        "thumbnailURL": "/assets/homes/home3",
-        "objectURL": "/assets/homes/home3"
+        "thumbnailURL": "/assets/images/home_thumb.png",
+        "objectURL": "/assets/homes/home3/modern_house_for_spatial.io.glb"
     },
     {
         "id": 4,
-        "name": "Villa 2",
+        "name": "Villa 4",
         "rentalPeriod": "1 Year",
-        "price": "6000",
+        "price": "5000",
         "unit": "MATIC",
-        "thumbnailURL": "/assets/homes/home4",
-        "objectURL": "/assets/homes/home4"
+        "thumbnailURL": "/assets/images/home_thumb.png",
+        "objectURL": "/assets/homes/home4/modern.glb"
     },
     {
         "id": 5,
-        "name": "Villa 2",
-        "rentalPeriod": "1 Year",
-        "price": "6000",
+        "name": "Villa 5",
+        "rentalPeriod": "2 Year",
+        "price": "10000",
         "unit": "MATIC",
-        "thumbnailURL": "/assets/homes/home5",
-        "objectURL": "/assets/homes/home5"
+        "thumbnailURL": "/assets/images/home_thumb.png",
+        "objectURL": "/assets/homes/home5/the_mill.glb"
     }
 ]

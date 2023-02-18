@@ -1,10 +1,16 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import PropertyList from '@/components/property-list/propertylist'
+import WagmiConnect from '../components/connect/wagmiconnect';
+import { WagmiConfig, createClient } from 'wagmi'
+import { getDefaultProvider } from 'ethers'
 
 const inter = Inter({ subsets: ['latin'] })
+
+const client = createClient({
+  autoConnect: true,
+  provider: getDefaultProvider(),
+});
 
 export default function Home() {
 
@@ -16,7 +22,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main></main>
+      <main>
+        <WagmiConfig client={client}>
+          <WagmiConnect></WagmiConnect>
+        </WagmiConfig>
+      </main>
     </>
   )
 }

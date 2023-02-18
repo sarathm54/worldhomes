@@ -22,10 +22,10 @@ export default function PropertyList({ children, isOpen, setIsOpen }) {
                 </article>
             </section>
             <section
-                className=" w-screen h-full cursor-pointer "
-                onClick={() => {
-                setIsOpen(false);
-                }}
+                className=" w-screen h-full pointer-events-none "
+                // onClick={() => {
+                // setIsOpen(false);
+                // }}
             ></section>
         </main>
     </>
