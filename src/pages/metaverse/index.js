@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from "react";
 import { 
     ArcRotateCamera,
@@ -14,6 +15,7 @@ import {
     Vector3
 } from "@babylonjs/core"
 import '@babylonjs/loaders'; 
+// import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import PropertyList from "@/components/property-list/propertylist";
 import Card from "@/components/card/card";
 import {getProperties} from "@/services/getProperties"
@@ -35,6 +37,11 @@ export default function Metaverse() {
         getpropertyList();
         setIsOpen(true);
     }, [])
+
+    // const queryClient = new QueryClient();
+    // const {data, isLoading, error } = useQuery("Tokens", () => {
+    //     return getProperties().then(response => response.data.data);
+    // })
 
     const startRender = () => {
         console.log("Start render call !");
@@ -69,7 +76,7 @@ export default function Metaverse() {
         camera.upperBetaLimit = Angle.FromDegrees(98).radians();
         camera.lowerBetaLimit = Angle.FromDegrees(63).radians();
         camera.lowerRadiusLimit = 0;
-        camera.upperRadiusLimit = 8;
+        camera.upperRadiusLimit = 32;
         camera.inputs.remove(camera.inputs.attached.keyboard);
         camera.checkCollisions=true;
 
@@ -92,8 +99,10 @@ export default function Metaverse() {
             homeUrl,
             null,
             scene,
-            (scene) => {
-                console.log("home loaded success callback --->", scene)
+            (meshes) => {
+                console.log("home loaded success callback --->", meshes)
+                meshes[0].scaling.set(0.1, 0.1, 0.1)
+                meshes[0].position.set(-10, -10, -20);
             }
           );
     }
@@ -112,7 +121,7 @@ export default function Metaverse() {
     const getpropertyList = () => {
         getProperties().then(list => {
             console.log('List from api ---->', list.data);
-            setProperties(list.data);
+            setProperties(list.data.data.tokens);
         });
     }
 
@@ -122,7 +131,7 @@ export default function Metaverse() {
         console.log('scene inside change home', scene);
         if(scene)  scene.dispose();
         startRender();
-        loadHome(properties[selectedHome].objectURL, scene, engine)
+        loadHome(properties[selectedHome].animation_url, scene, engine)
     }
 
     return <>

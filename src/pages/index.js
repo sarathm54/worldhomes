@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import React, { useEffect, useRef } from "react";
 import WagmiConnect from '../components/connect/wagmiconnect';
 import { WagmiConfig, createClient } from 'wagmi'
 import { getDefaultProvider } from 'ethers'
+import { getOwnedProperties } from '@/services/getProperties'
+import CardPortrait from '@/components/card/cardportrait';
+import Link from 'next/link'
+import { HeroSection } from '@/components/herosection/herosection';
+import { AppHeader } from '@/components/header/header';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +20,22 @@ const client = createClient({
 
 export default function Home() {
 
+  const [domLoaded, setDomLoaded] = React.useState(false);
+  const [connected, setConnected] = React.useState('');
+  const [ownedProperties, setOwnedProperties] = React.useState([]);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
+  const isConnected = (address) => {
+    if(!address) return;
+    setConnected(address);
+    getOwnedProperties(address).then((properties) => {
+      console.log("owned properties", properties.data);
+      setOwnedProperties(properties.data.data.tokens)
+    });
+  }
   return (
     <>
       <Head>
@@ -22,10 +44,23 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <WagmiConfig client={client}>
-          <WagmiConnect></WagmiConnect>
-        </WagmiConfig>
+      <main className='bg-gray-900'>
+        {domLoaded && (
+          <WagmiConfig client={client}>
+          <AppHeader connectedAddress={isConnected}></AppHeader>
+          <HeroSection connectedAddress={isConnected}></HeroSection>
+            <WagmiConnect connectedAddress={isConnected}></WagmiConnect>
+          </WagmiConfig>
+        )}
+        {(ownedProperties.length > 0 && client.status==='connected') && (
+          <section>
+            <div class="grid grid-cols-4 gap-4">
+              {ownedProperties.map((property, index) => (
+                <CardPortrait property={property} key={index} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   )
